@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 
 /**
  *
- * @author mazhao
+ * @author MaGuangzhao
  */
 public class MainFrame extends javax.swing.JFrame {
 
