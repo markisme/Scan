@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
 
 /**
  *
- * @author mazhao
+ * @author MaGuangzhao
  */
 public class scan implements Runnable {
 
@@ -24,7 +24,6 @@ public class scan implements Runnable {
     private static InetAddress ip;
     private static int num;
     private final JTextArea TextR;
-    MainFrame mf = new MainFrame();
 
     public scan(int n, InetAddress ipr, int numr, JTextArea Textarea) {
         ip = ipr;
