@@ -219,6 +219,7 @@ public class MainFrame extends javax.swing.JFrame {
     //开始扫描按钮监听事件
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
 
+        if(start.getText().equals("开始扫描")){
         //初始化数据目标IP、线程数
         String str = TextIp.getText();
         try {
@@ -259,6 +260,10 @@ public class MainFrame extends javax.swing.JFrame {
          TextR.append("扫描结束！\n");
          start.setText("开始扫描");
          */
+        }
+        else if(start.getText().equals("正在扫描")){
+            
+        }
     }//GEN-LAST:event_startActionPerformed
 
     //退出按钮监听事件
