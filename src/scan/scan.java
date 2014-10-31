@@ -8,8 +8,6 @@ package scan;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -28,23 +26,23 @@ public class scan implements Runnable {
     private final JTextArea TextR;
     private final JButton start;
     private final JLabel state;
-    
+
     //scan类构造函数
-    public scan(InetAddress ipr, int i,  int numt, JTextArea Textarea, JButton start1, JLabel state1) {
+    public scan(InetAddress ipr, int i, int numt, JTextArea Textarea, JButton start1, JLabel state1) {
         index = i;
         ip = ipr;
         Threadnum = numt;
         this.TextR = Textarea;
         this.start = start1;
-        this.state=state1;
+        this.state = state1;
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         int i;
-        for (i = index;i <=MainFrame.Mport; i+=Threadnum) {
-            state.setText("正在扫描端口："+i);
-            
+        for (i = index; i <= MainFrame.Mport; i += Threadnum) {
+            state.setText("正在扫描端口：" + i);
+
             try {
                 socket = new Socket(ip, i);
                 socket.close();
@@ -54,14 +52,13 @@ public class scan implements Runnable {
                 // e.printStackTrace();
                 // TextR.append("端口" + i + "关闭"+"\n");
             }
-            MainFrame.total++;
-            if (MainFrame.total == MainFrame.Mport) {
-
-            TextR.append("扫描结束.\n");
-            start.setText("开始扫描");
-            state.setText("扫描结束！");
-        }
-        
+            System.out.println(i);
+            if (i == MainFrame.Mport) {
+                TextR.append("扫描结束.\n");
+                start.setText("开始扫描");
+                state.setText("扫描结束！");
+            }
         }
     }
+
 }
