@@ -23,7 +23,8 @@ public class MainFrame extends javax.swing.JFrame {
     public static InetAddress ip;   //目标ip
     public static int Mport = 65535;//最大端口
     public static int Tnum;         //最大线程数
-    public static int total = 0;      //扫描完成的端口数，用于判断扫描任务是否完成
+    public static int mainthread_num;      //主程序运行线程数，用于判断扫描端口的子线程是否完成
+    //在main中初始化
 
     public MainFrame() {
         initComponents();
@@ -60,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setText("目标IP:");
 
-        TextIp.setText("180.97.33.108");
+        TextIp.setText("www.sina.com.cn");
         TextIp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextIpActionPerformed(evt);
@@ -291,7 +292,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ThreadNumActionPerformed
 
-    //判断主机存活按钮监听事件
+    //判断主机存活按钮的监听事件
     private void isAliveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isAliveActionPerformed
 
         // TODO add your handling code here:
@@ -348,6 +349,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new MainFrame().setVisible(true);
         });
+        mainthread_num = Thread.activeCount();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

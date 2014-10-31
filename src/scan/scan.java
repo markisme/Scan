@@ -38,7 +38,7 @@ public class scan implements Runnable {
     }
 
     @Override
-    public synchronized void run() {
+    public void run() {
         int i;
         for (i = index; i <= MainFrame.Mport; i += Threadnum) {
             state.setText("正在扫描端口：" + i);
@@ -52,8 +52,9 @@ public class scan implements Runnable {
                 // e.printStackTrace();
                 // TextR.append("端口" + i + "关闭"+"\n");
             }
-            System.out.println(i);
-            if (i == MainFrame.Mport) {
+            System.out.println(Thread.activeCount());
+            //当仅剩下主线程与当前线程时表示所有端口扫描完成
+            if (Thread.activeCount() == MainFrame.mainthread_num + 1) {
                 TextR.append("扫描结束.\n");
                 start.setText("开始扫描");
                 state.setText("扫描结束！");
