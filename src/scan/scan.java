@@ -32,7 +32,7 @@ public class scan implements Runnable {
         index = n;
         num = numr;
         this.TextR = Textarea;
-        start=start1;
+        this.start=start1;
     }
 
     @Override
@@ -40,19 +40,12 @@ public class scan implements Runnable {
         for (int i = num * index; (i <= 65535) && (i < num * (index + 1)); i++) {
             try {
                 socket = new Socket(ip, i);
+                socket.close();
                 TextR.append(i + "\n");
                 //socket.close();
             } catch (IOException e) {
                 // e.printStackTrace();
                 // TextR.append("端口" + i + "关闭"+"\n");
-            } finally {
-                if (socket != null) {
-                    try {
-                        socket.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(scan.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
             }
             if(i==num){
                 TextR.append("扫描结束.\n");
