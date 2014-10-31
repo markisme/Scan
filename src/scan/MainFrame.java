@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  *
  * @author MaGuangzhao
  */
+
 public class MainFrame extends javax.swing.JFrame {
 
     /**
@@ -24,7 +25,8 @@ public class MainFrame extends javax.swing.JFrame {
     public static InetAddress ip;   //目标ip
     public static int Mport = 65535;//最大端口
     public static int Tnum;         //最大线程数
-    public static int total=0;
+    public static int total=0;      //扫描完成的端口数，用于判断扫描任务是否完成
+    
     public MainFrame() {
         initComponents();
     }
