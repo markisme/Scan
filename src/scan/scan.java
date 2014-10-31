@@ -44,6 +44,7 @@ public class scan implements Runnable {
         int i;
         for (i = index;i <=MainFrame.Mport; i+=Threadnum) {
             state.setText("正在扫描端口："+i);
+            
             try {
                 socket = new Socket(ip, i);
                 socket.close();
@@ -53,14 +54,8 @@ public class scan implements Runnable {
                 // e.printStackTrace();
                 // TextR.append("端口" + i + "关闭"+"\n");
             }
-            
-            if (i == MainFrame.Mport) {
-
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(scan.class.getName()).log(Level.SEVERE, null, ex);
-                }
+            MainFrame.total++;
+            if (MainFrame.total == MainFrame.Mport) {
 
             TextR.append("扫描结束.\n");
             start.setText("开始扫描");
