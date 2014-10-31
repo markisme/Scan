@@ -20,7 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public static InetAddress ip;
-    public static int num = 1000;
+    public static int num = 65535;
     public static int Tnum;
     static BufferedReader bufferedReader;
 
@@ -196,7 +196,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextIpActionPerformed
 
-
+    //开始扫描按钮监听事件
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
 
         //start.setText("正在扫描");
@@ -211,7 +211,6 @@ public class MainFrame extends javax.swing.JFrame {
             jLabelNum.setText("数值范围不合法！");
             return;
         }
-        Thread thread = null;
         try {
             // TODO add your handling code here:
 
@@ -223,24 +222,25 @@ public class MainFrame extends javax.swing.JFrame {
         TextR.append("开始扫描...\n");
         start.setText("正在扫描");
         for (int i = 0; i < Tnum; i++) {
-            thread = new Thread(new scan(0, ip, num, TextR));
-            thread.start();
+            new Thread(new scan(i, ip, num, TextR, start)).start();
+            
         }
-      /*  while (true) {
-            if (thread.getState().toString().equals("TERMINATED")) {
-                break;
-            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        TextR.append("扫描结束！\n");
-        start.setText("开始扫描");
-            */
+        /*  while (true) {
+         if (thread.getState().toString().equals("TERMINATED")) {
+         break;
+         }
+         try {
+         Thread.sleep(1000);
+         } catch (InterruptedException ex) {
+         Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         }
+         TextR.append("扫描结束！\n");
+         start.setText("开始扫描");
+         */
     }//GEN-LAST:event_startActionPerformed
 
+    //退出按钮监听事件
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
         // TODO add your handling code here:
         System.exit(0);
@@ -250,23 +250,24 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ThreadNumActionPerformed
 
+    //判断主机存活按钮监听事件
     private void isAliveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isAliveActionPerformed
 
         // TODO add your handling code here:
-        boolean stat=false;
+        boolean stat = false;
         try {
-            stat=ip.isReachable(1000);
+            stat = ip.isReachable(1000);
         } catch (IOException ex) {
-         //   Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            //   Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         isAlive.setText("正在判断主机存活性");
         TextR.append("正在判断主机是否存活...\n");
-        
-            if (stat) {
-                TextR.append("主机存活！\n");
-                } else {
-                TextR.append("主机不在线！\n");
-                        }
+
+        if (stat) {
+            TextR.append("主机存活！\n");
+        } else {
+            TextR.append("主机不在线！\n");
+        }
         isAlive.setText("判断主机存活");
     }//GEN-LAST:event_isAliveActionPerformed
 

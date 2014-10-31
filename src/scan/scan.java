@@ -10,6 +10,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JTextArea;
 
 /**
@@ -24,12 +25,14 @@ public class scan implements Runnable {
     private static InetAddress ip;
     private static int num;
     private final JTextArea TextR;
+    private final JButton start;
 
-    public scan(int n, InetAddress ipr, int numr, JTextArea Textarea) {
+    public scan(int n, InetAddress ipr, int numr, JTextArea Textarea, JButton start1) {
         ip = ipr;
         index = n;
         num = numr;
         this.TextR = Textarea;
+        start=start1;
     }
 
     @Override
@@ -50,6 +53,10 @@ public class scan implements Runnable {
                         Logger.getLogger(scan.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+            }
+            if(i==num){
+                TextR.append("扫描结束.\n");
+                start.setText("开始扫描");
             }
 
         }
