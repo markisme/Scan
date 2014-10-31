@@ -108,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("宋体", 0, 10)); // NOI18N
         jLabel5.setForeground(java.awt.Color.red);
-        jLabel5.setText("建议线程数不要超过2000");
+        jLabel5.setText("建议线程数不要超过5000");
 
         state.setFont(new java.awt.Font("宋体", 0, 10)); // NOI18N
         state.setForeground(java.awt.Color.red);
