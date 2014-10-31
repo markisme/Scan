@@ -52,6 +52,7 @@ public class MainFrame extends javax.swing.JFrame {
         ThreadNum = new javax.swing.JFormattedTextField();
         jLabelNum = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        state = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +111,9 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel5.setForeground(java.awt.Color.red);
         jLabel5.setText("建议线程数不要超过50");
 
+        state.setFont(new java.awt.Font("宋体", 0, 10)); // NOI18N
+        state.setForeground(java.awt.Color.red);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,6 +147,9 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(state, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(65, 65, 65)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -178,11 +185,11 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(start)
                         .addGap(28, 28, 28)
                         .addComponent(stop)
-                        .addGap(77, 77, 77))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                        .addComponent(jLabel4))))
+                        .addGap(26, 26, 26)
+                        .addComponent(state))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jLabel4))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -236,7 +243,7 @@ public class MainFrame extends javax.swing.JFrame {
         start.setText("正在扫描");
         //将所有端口分成Tnum部分，每个线程负责扫描一部分，实现多线程加速扫描
         for (int i = 1; i <=Tnum; i++) {
-            new Thread(new scan(ip,  i,Tnum, TextR, start)).start();//根据构造函数传入变量
+            new Thread(new scan(ip,  i,Tnum, TextR, start,state)).start();//根据构造函数传入变量
 
         }
         /*  while (true) {
@@ -269,16 +276,18 @@ public class MainFrame extends javax.swing.JFrame {
 
         // TODO add your handling code here:
         String str = TextIp.getText();
+        isAlive.setText("正在判断主机存活性");
+        TextR.append("正在判断主机是否存活...\n");
+        
          try {
             // TODO add your handling code here:
 
             ip = InetAddress.getByName(str);
         } catch (UnknownHostException ex) {
-            TextR.append("未知的主机或者IP格式不正确!请重试!\n");
+            TextR.append("未知的主机名或者IP格式不正确!请重试!\n");
             return;
         }
-        isAlive.setText("正在判断主机存活性");
-        TextR.append("正在判断主机是否存活...\n");
+
         
         boolean stat = true;
         try {
@@ -336,6 +345,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton start;
+    private javax.swing.JLabel state;
     private javax.swing.JButton stop;
     // End of variables declaration//GEN-END:variables
 }
