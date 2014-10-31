@@ -223,7 +223,7 @@ public class MainFrame extends javax.swing.JFrame {
         start.setText("正在扫描");
         for (int i = 0; i < Tnum; i++) {
             new Thread(new scan(i, ip, num, TextR, start)).start();
-            
+
         }
         /*  while (true) {
          if (thread.getState().toString().equals("TERMINATED")) {

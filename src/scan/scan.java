@@ -8,8 +8,6 @@ package scan;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
@@ -32,7 +30,7 @@ public class scan implements Runnable {
         index = n;
         num = numr;
         this.TextR = Textarea;
-        this.start=start1;
+        this.start = start1;
     }
 
     @Override
@@ -47,7 +45,7 @@ public class scan implements Runnable {
                 // e.printStackTrace();
                 // TextR.append("端口" + i + "关闭"+"\n");
             }
-            if(i==num){
+            if (i == num) {
                 TextR.append("扫描结束.\n");
                 start.setText("开始扫描");
             }
