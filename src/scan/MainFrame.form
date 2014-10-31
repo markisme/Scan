@@ -217,9 +217,8 @@
         <Component class="javax.swing.JFormattedTextField" name="ThreadNum">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="1" type="0"/>
+              <Format format="#0" subtype="-1" type="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="20"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ThreadNumActionPerformed"/>
@@ -241,7 +240,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" id="red" palette="1" red="ff" type="palette"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x5efa;&#x8bae;&#x7ebf;&#x7a0b;&#x6570;&#x4e0d;&#x8981;&#x8d85;&#x8fc7;50"/>
+            <Property name="text" type="java.lang.String" value="&#x5efa;&#x8bae;&#x7ebf;&#x7a0b;&#x6570;&#x4e0d;&#x8981;&#x8d85;&#x8fc7;5000"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="state">

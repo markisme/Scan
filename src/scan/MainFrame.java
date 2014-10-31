@@ -97,8 +97,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel4.setText("by maguangzhao,2014-10-28 14:48:24");
 
-        ThreadNum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        ThreadNum.setText("20");
+        ThreadNum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         ThreadNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThreadNumActionPerformed(evt);
@@ -109,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("宋体", 0, 10)); // NOI18N
         jLabel5.setForeground(java.awt.Color.red);
-        jLabel5.setText("建议线程数不要超过50");
+        jLabel5.setText("建议线程数不要超过5000");
 
         state.setFont(new java.awt.Font("宋体", 0, 10)); // NOI18N
         state.setForeground(java.awt.Color.red);
@@ -219,7 +218,7 @@ public class MainFrame extends javax.swing.JFrame {
     //开始扫描按钮监听事件
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
 
-        if(start.getText().equals("开始扫描")){
+        if(start.getText().equals("开始端口扫描")){
         //初始化数据目标IP、线程数
         String str = TextIp.getText();
         try {
@@ -261,7 +260,8 @@ public class MainFrame extends javax.swing.JFrame {
          start.setText("开始扫描");
          */
         }
-        else if(start.getText().equals("正在扫描")){
+        else
+        {
             
         }
     }//GEN-LAST:event_startActionPerformed

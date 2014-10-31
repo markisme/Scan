@@ -8,6 +8,8 @@ package scan;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -53,6 +55,13 @@ public class scan implements Runnable {
             }
             
             if (i == MainFrame.Mport) {
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(scan.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             TextR.append("扫描结束.\n");
             start.setText("开始扫描");
             state.setText("扫描结束！");
