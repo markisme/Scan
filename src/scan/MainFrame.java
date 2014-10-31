@@ -5,7 +5,7 @@
  */
 package scan;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -21,10 +21,9 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    public static InetAddress ip;
-    public static int num = 65535;
-    public static int Tnum;
-    static BufferedReader bufferedReader;
+    public static InetAddress ip;   //目标ip
+    public static int Mport = 65535;//最大端口
+    public static int Tnum;         //最大线程数
 
     public MainFrame() {
         initComponents();
@@ -52,6 +51,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         ThreadNum = new javax.swing.JFormattedTextField();
         jLabelNum = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,37 +106,46 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabelNum.setText("1-65535");
 
+        jLabel5.setFont(new java.awt.Font("宋体", 0, 10)); // NOI18N
+        jLabel5.setForeground(java.awt.Color.red);
+        jLabel5.setText("建议线程数不要超过50");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(start, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                             .addComponent(stop, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(isAlive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                                .addGap(7, 7, 7)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TextIp, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(ThreadNum, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelNum)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                                        .addGap(7, 7, 7)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TextIp, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(ThreadNum, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabelNum)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(184, 184, 184)
                 .addComponent(jLabel3)
@@ -161,6 +170,8 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(ThreadNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelNum))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(isAlive)
                         .addGap(26, 26, 26)
@@ -201,6 +212,7 @@ public class MainFrame extends javax.swing.JFrame {
     //开始扫描按钮监听事件
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
 
+        //初始化数据目标IP、线程数
         String str = TextIp.getText();
         try {
             Tnum = Integer.parseInt(ThreadNum.getText());
@@ -224,8 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
         start.setText("正在扫描");
         //将所有端口分成Tnum部分，每个线程负责扫描一部分，实现多线程加速扫描
         for (int i = 1; i <=Tnum; i++) {
-            new Thread(new scan(num/(Tnum-1), ip, i, TextR, start)).start();//num/(Tnum-1)为每个分块的大小,
-                                                                            //最后一个分块小于等于num/(Tnum-1)
+            new Thread(new scan(ip,  i,Tnum, TextR, start)).start();//根据构造函数传入变量
 
         }
         /*  while (true) {
@@ -257,16 +268,25 @@ public class MainFrame extends javax.swing.JFrame {
     private void isAliveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isAliveActionPerformed
 
         // TODO add your handling code here:
+        String str = TextIp.getText();
+         try {
+            // TODO add your handling code here:
+
+            ip = InetAddress.getByName(str);
+        } catch (UnknownHostException ex) {
+            TextR.append("未知的主机或者IP格式不正确!请重试!\n");
+            return;
+        }
+        isAlive.setText("正在判断主机存活性");
+        TextR.append("正在判断主机是否存活...\n");
+        
         boolean stat = true;
         try {
             stat = ip.isReachable(5000);
             System.out.println(stat);
-        } catch (NullPointerException | IOException ex) {
+        } catch (IOException ex) {
                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        isAlive.setText("正在判断主机存活性");
-        TextR.append("正在判断主机是否存活...\n");
-
         if (stat) {
             TextR.append("主机存活！\n");
         } else {
@@ -311,6 +331,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelNum;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

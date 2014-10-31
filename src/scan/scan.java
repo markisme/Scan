@@ -21,14 +21,15 @@ public class scan implements Runnable {
     private Socket socket;
     private final int index;
     private static InetAddress ip;
-    private static int num;
+    private static int Threadnum;
     private final JTextArea TextR;
     private final JButton start;
-
-    public scan(int part, InetAddress ipr, int numr, JTextArea Textarea, JButton start1) {
-        index = part;
+    
+    //scan类构造函数
+    public scan(InetAddress ipr, int i,  int numt, JTextArea Textarea, JButton start1) {
+        index = i;
         ip = ipr;
-        num = numr;
+        Threadnum = numt;
         this.TextR = Textarea;
         this.start = start1;
     }
@@ -36,7 +37,7 @@ public class scan implements Runnable {
     @Override
     public void run() {
         int i;
-        for (i = ((num - 1) * index) + 1; (i <= num * index)&&(i <=65535); i++) {
+        for (i = index;i <=MainFrame.Mport; i+=Threadnum) {
             try {
                 socket = new Socket(ip, i);
                 socket.close();
@@ -47,7 +48,7 @@ public class scan implements Runnable {
                 // TextR.append("端口" + i + "关闭"+"\n");
             }
         }
-        if (i == 65535) {
+        if (i == MainFrame.Mport) {
             TextR.append("扫描结束.\n");
             start.setText("开始扫描");
         }
