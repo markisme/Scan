@@ -25,9 +25,9 @@ public class scan implements Runnable {
     private final JTextArea TextR;
     private final JButton start;
 
-    public scan(int n, InetAddress ipr, int numr, JTextArea Textarea, JButton start1) {
+    public scan(int part, InetAddress ipr, int numr, JTextArea Textarea, JButton start1) {
+        index = part;
         ip = ipr;
-        index = n;
         num = numr;
         this.TextR = Textarea;
         this.start = start1;
@@ -35,7 +35,8 @@ public class scan implements Runnable {
 
     @Override
     public void run() {
-        for (int i = num * index; (i <= 65535) && (i < num * (index + 1)); i++) {
+        int i;
+        for (i = ((num - 1) * index) + 1; (i <= num * index)&&(i <=65535); i++) {
             try {
                 socket = new Socket(ip, i);
                 socket.close();
@@ -45,13 +46,10 @@ public class scan implements Runnable {
                 // e.printStackTrace();
                 // TextR.append("端口" + i + "关闭"+"\n");
             }
-            if (i == num) {
-                TextR.append("扫描结束.\n");
-                start.setText("开始扫描");
-            }
-
         }
-
+        if (i == 65535) {
+            TextR.append("扫描结束.\n");
+            start.setText("开始扫描");
+        }
     }
-
 }

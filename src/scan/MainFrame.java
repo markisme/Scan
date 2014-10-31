@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -95,7 +97,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4.setText("by maguangzhao,2014-10-28 14:48:24");
 
         ThreadNum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        ThreadNum.setText("50");
+        ThreadNum.setText("20");
         ThreadNum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThreadNumActionPerformed(evt);
@@ -199,7 +201,6 @@ public class MainFrame extends javax.swing.JFrame {
     //开始扫描按钮监听事件
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
 
-        //start.setText("正在扫描");
         String str = TextIp.getText();
         try {
             Tnum = Integer.parseInt(ThreadNum.getText());
@@ -216,13 +217,15 @@ public class MainFrame extends javax.swing.JFrame {
 
             ip = InetAddress.getByName(str);
         } catch (UnknownHostException ex) {
-            TextR.append("IP格式不正确!\n");
+            TextR.append("未知的主机或者IP格式不正确!请重试!\n");
             return;
         }
         TextR.append("开始扫描...\n");
         start.setText("正在扫描");
-        for (int i = 0; i < Tnum; i++) {
-            new Thread(new scan(i, ip, num, TextR, start)).start();
+        //将所有端口分成Tnum部分，每个线程负责扫描一部分，实现多线程加速扫描
+        for (int i = 1; i <=Tnum; i++) {
+            new Thread(new scan(num/(Tnum-1), ip, i, TextR, start)).start();//num/(Tnum-1)为每个分块的大小,
+                                                                            //最后一个分块小于等于num/(Tnum-1)
 
         }
         /*  while (true) {
@@ -254,11 +257,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void isAliveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isAliveActionPerformed
 
         // TODO add your handling code here:
-        boolean stat = false;
+        boolean stat = true;
         try {
-            stat = ip.isReachable(1000);
-        } catch (IOException ex) {
-            //   Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            stat = ip.isReachable(5000);
+            System.out.println(stat);
+        } catch (NullPointerException | IOException ex) {
+               Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         isAlive.setText("正在判断主机存活性");
         TextR.append("正在判断主机是否存活...\n");
